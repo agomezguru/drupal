@@ -52,6 +52,9 @@ RUN "date"
 # Database driver connection to percona.
 RUN docker-php-ext-install pdo_mysql
 
+# Add drush to cli
+RUN export PATH=/srv/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 # tag: agomezguru/drupal:9.x-php7.3.27
 # Example: docker build . --tag agomezguru/drupal:9.x-php7.3.27
 
