@@ -1,6 +1,6 @@
-# Quick reference, laravel
+# Quick reference, Drupal
 
-Configured PHP 7.3 server for deploy Drupal 9.x based projects
+Configured PHP 7.4.x server for deploy Drupal 8.x and 9.x based projects
 
 - **Maintained by**:
 [agomezguru](https://github.com/agomezguru)
@@ -10,7 +10,7 @@ Configured PHP 7.3 server for deploy Drupal 9.x based projects
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`9.x-php7.3.27`, `latest`](https://github.com/agomezguru/nginx)
+- [`9.x-php7.4.23`, `latest`](https://github.com/agomezguru/nginx)
 
 ## How to use this image
 
@@ -44,7 +44,7 @@ services:
       - $env-network
 
   php:
-    image: agomezguru/drupal:9.x-php7.3.27
+    image: agomezguru/drupal:9.x-php7.4.23
     volumes:
       - ../someCode:/srv
       - my-public:/srv/public
@@ -53,7 +53,7 @@ services:
       - $env-network
 
   db:
-    image: percona:5.7.30
+    image: percona:5.7.35
     volumes:
       - my-db-data:/var/lib/mysql
       - ../percona/masterdb/config:/etc/mysql/conf.d
