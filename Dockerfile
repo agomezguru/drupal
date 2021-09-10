@@ -9,8 +9,9 @@
 # This Dockerfile was created 19/04/2021 for reuse the Docker build images more efficiently
 # so, please don't be use directly. For more details see the comments at the end of this file. 
 
-# Use an official PHP runtime as a parent image
-FROM php:7.3.27-fpm
+# Use an official PHP runtime as a parent image.
+# Ref.: https://www.drupal.org/docs/system-requirements/php-requirements
+FROM php:7.4.23-fpm
 
 LABEL maintainer "Alejandro Gomez Lagunas <alagunas@coati.com.mx>"
 
@@ -29,10 +30,10 @@ RUN apt-get install -y libxml2-dev
 RUN apt-get install -y libxslt1-dev
 RUN apt-get install -y libmcrypt-dev
 RUN apt-get install -y libzip-dev
+RUN apt-get install -y redis-tools
 
 # Run docker-php-ext-install for available extensions
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ 
-RUN docker-php-ext-install gd
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install xsl
@@ -53,7 +54,7 @@ RUN "date"
 RUN docker-php-ext-install pdo_mysql
 
 # Add drush to cli
-RUN export PATH=/srv/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH=/srv/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # tag: agomezguru/drupal:9.x-php7.3.27
 # Example: docker build . --tag agomezguru/drupal:9.x-php7.3.27
