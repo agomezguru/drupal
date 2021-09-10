@@ -8,6 +8,7 @@
 
 # This Dockerfile was created 19/04/2021 for reuse the Docker build images more efficiently
 # so, please don't be use directly. For more details see the comments at the end of this file. 
+# Last updated: 10/09/2021 15:08 
 
 # Use an official PHP runtime as a parent image.
 # Ref.: https://www.drupal.org/docs/system-requirements/php-requirements
