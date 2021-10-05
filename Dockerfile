@@ -31,10 +31,10 @@ RUN apt-get install -y libxml2-dev
 RUN apt-get install -y libxslt1-dev
 RUN apt-get install -y libmcrypt-dev
 RUN apt-get install -y libzip-dev
-RUN apt-get install -y redis-tools
 
 # Run docker-php-ext-install for available extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+  && docker-php-ext-install -j$(nproc) gd
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install xsl
@@ -42,8 +42,11 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install sockets
 
+RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
+
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | \
+  php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer --version
 
 # Set your timezone here...
@@ -57,6 +60,7 @@ RUN docker-php-ext-install pdo_mysql
 # Add drush to cli
 ENV PATH=/srv/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
+WORKDIR /srv
 # tag: agomezguru/drupal:9.x-php7.3.27
 # Example: docker build . --tag agomezguru/drupal:9.x-php7.3.27
 
