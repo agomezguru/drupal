@@ -12,7 +12,7 @@
 
 # Use an official PHP runtime as a parent image.
 # Ref.: https://www.drupal.org/docs/system-requirements/php-requirements
-FROM php:7.4.23-fpm
+FROM php:7.4.24-fpm
 
 LABEL maintainer "Alejandro Gomez Lagunas <alagunas@coati.com.mx>"
 
