@@ -31,16 +31,23 @@ RUN apt-get install -y libxml2-dev
 RUN apt-get install -y libxslt1-dev
 RUN apt-get install -y libmcrypt-dev
 RUN apt-get install -y libzip-dev
+RUN apt-get install -y libwebp-dev
+RUN apt-get install -y libwebp6
+RUN apt-get install -y webp
+RUN apt-get install -y libmagickwand-dev --no-install-recommends \
+  && rm -rf /var/lib/apt/lists/*
 
 # Run docker-php-ext-install for available extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-  && docker-php-ext-install -j$(nproc) gd
+RUN docker-php-ext-configure gd --with-freetype \
+  --with-jpeg --with-webp && docker-php-ext-install -j$(nproc) gd
+
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install sockets
+RUN printf "\n" | pecl install imagick && docker-php-ext-enable imagick
 
 RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
 
