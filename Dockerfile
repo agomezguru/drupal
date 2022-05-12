@@ -12,7 +12,7 @@
 
 # Use an official PHP runtime as a parent image.
 # Ref.: https://www.drupal.org/docs/system-requirements/php-requirements
-FROM php:7.4.23-fpm
+FROM php:7.4.29-fpm
 
 LABEL maintainer "Alejandro Gomez Lagunas <alagunas@coati.com.mx>"
 
@@ -68,8 +68,8 @@ RUN docker-php-ext-install pdo_mysql
 ENV PATH=/srv/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 WORKDIR /srv
-# tag: agomezguru/drupal:9.x-php7.3.27
-# Example: docker build . --tag agomezguru/drupal:9.x-php7.3.27
+# tag: agomezguru/drupal:9.x-php7.4.x
+# Example: docker build . --tag agomezguru/drupal:9.x-php7.4.x
 
 # If you desire use this Docker Image directly, uncomment the next line. 
 # CMD php-fpm -F

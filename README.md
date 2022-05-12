@@ -1,6 +1,6 @@
 # Quick reference, Drupal
 
-Configured PHP 7.4.x server for deploy Drupal 8.x and 9.x based projects
+Configured PHP 7.4.x server for deploy Drupal 9.x based projects
 
 - **Maintained by**:
 [agomezguru](https://github.com/agomezguru)
@@ -10,7 +10,7 @@ Configured PHP 7.4.x server for deploy Drupal 8.x and 9.x based projects
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`9.x-php7.4.23`, `latest`](https://github.com/agomezguru/nginx)
+- [`9.x-php7.4.x`, `latest`](https://github.com/agomezguru/nginx)
 
 ## How to use this image
 
