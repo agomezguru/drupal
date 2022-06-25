@@ -8,33 +8,33 @@
 
 # This Dockerfile was created 19/04/2021 for reuse the Docker build images more efficiently
 # so, please don't be use directly. For more details see the comments at the end of this file. 
-# Last updated: 10/09/2021 15:08 
+# Last updated: 24/06/2022 19:45 
 
 # Use an official PHP runtime as a parent image.
 # Ref.: https://www.drupal.org/docs/system-requirements/php-requirements
-FROM php:7.4.29-fpm
+FROM php:8.1.4-fpm
 
 LABEL maintainer "Alejandro Gomez Lagunas <alagunas@coati.com.mx>"
 
 # Get the last available packages
-RUN apt-get update
+RUN apt update
 
 # Install any needed packages
-RUN apt-get install -y libpng16-16
-RUN apt-get install -y libpng-dev
-RUN apt-get install -y git
-RUN apt-get install -y mariadb-client
-RUN apt-get install -y libicu-dev
-RUN apt-get install -y libfreetype6-dev
-RUN apt-get install -y libjpeg62-turbo-dev
-RUN apt-get install -y libxml2-dev
-RUN apt-get install -y libxslt1-dev
-RUN apt-get install -y libmcrypt-dev
-RUN apt-get install -y libzip-dev
-RUN apt-get install -y libwebp-dev
-RUN apt-get install -y libwebp6
-RUN apt-get install -y webp
-RUN apt-get install -y libmagickwand-dev --no-install-recommends \
+RUN apt install -y libpng16-16
+RUN apt install -y libpng-dev
+RUN apt install -y git
+RUN apt install -y mariadb-client
+RUN apt install -y libicu-dev
+RUN apt install -y libfreetype6-dev
+RUN apt install -y libjpeg62-turbo-dev
+RUN apt install -y libxml2-dev
+RUN apt install -y libxslt1-dev
+RUN apt install -y libmcrypt-dev
+RUN apt install -y libzip-dev
+RUN apt install -y libwebp-dev
+RUN apt install -y libwebp6
+RUN apt install -y webp
+RUN apt install -y libmagickwand-dev --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 # Run docker-php-ext-install for available extensions
@@ -68,8 +68,8 @@ RUN docker-php-ext-install pdo_mysql
 ENV PATH=/srv/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 WORKDIR /srv
-# tag: agomezguru/drupal:9.x-php7.4.x
-# Example: docker build . --tag agomezguru/drupal:9.x-php7.4.x
+# tag: agomezguru/drupal:9.x-php8.1.x
+# Example: docker build . --tag agomezguru/drupal:9.x-php8.1.x
 
 # If you desire use this Docker Image directly, uncomment the next line. 
 # CMD php-fpm -F

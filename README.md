@@ -1,6 +1,6 @@
 # Quick reference, Drupal
 
-Configured PHP 7.4.x server for deploy Drupal 9.x based projects
+Configured PHP 8.1.x server for deploy Drupal 9.x based projects
 
 - **Maintained by**:
 [agomezguru](https://github.com/agomezguru)
@@ -10,7 +10,7 @@ Configured PHP 7.4.x server for deploy Drupal 9.x based projects
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`9.x-php7.4.x`, `latest`](https://github.com/agomezguru/nginx)
+- [`9.x-php8.1.x`](https://github.com/agomezguru/nginx)
 
 ## How to use this image
 
@@ -28,7 +28,7 @@ volumes:
 
 services:
   web:
-    image: agomezguru/nginx:laravel-5x
+    image: agomezguru/nginx:laravel-8x
     ports:
       - "$outsidePort:80"
     environment:
@@ -44,7 +44,7 @@ services:
       - $env-network
 
   php:
-    image: agomezguru/drupal:9.x-php7.4.23
+    image: agomezguru/drupal:9.x-php8.1.x
     volumes:
       - ../someCode:/srv
       - my-public:/srv/public
