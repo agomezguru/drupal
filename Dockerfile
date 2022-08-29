@@ -8,11 +8,11 @@
 
 # This Dockerfile was created 19/04/2021 for reuse the Docker build images more efficiently
 # so, please don't be use directly. For more details see the comments at the end of this file. 
-# Last updated: 24/06/2022 19:45 
+# Last updated: 29/08/2022 12:33 
 
 # Use an official PHP runtime as a parent image.
 # Ref.: https://www.drupal.org/docs/system-requirements/php-requirements
-FROM php:8.1.6-fpm
+FROM php:8.1.4-fpm
 
 LABEL maintainer "Alejandro Gomez Lagunas <alagunas@coati.com.mx>"
 
