@@ -14,44 +14,46 @@
 # Ref.: https://www.drupal.org/docs/system-requirements/php-requirements
 FROM php:8.3.1-fpm 
 
-LABEL maintainer "Alejandro Gomez Lagunas <alagunas@coati.com.mx>"
+LABEL maintainer="Alejandro Gomez Lagunas <alagunas@coati.com.mx>"
 
-# Get the last available packages
-RUN apt update
+# Install any needed packages and clear cache
+RUN set=-eux pipefail; \
+    apt-get update; \
+    apt-get upgrade -y; \
+    apt-get install -y --no-install-recommends \
+      git \
+      libicu-dev \
+      libfreetype6-dev \
+      libjpeg62-turbo-dev \
+      libmagickwand-dev \
+      libmcrypt-dev \
+      libpng16-16 \
+      libpng-dev \
+      libwebp7 \
+      libxml2-dev \
+      libxslt1-dev \
+      libzip-dev \
+      mariadb-client \
+      webp; \
+    rm -rf /var/lib/apt/lists/*
 
-# Install any needed packages
-RUN apt install -y libpng16-16
-RUN apt install -y libpng-dev
-RUN apt install -y git
-RUN apt install -y mariadb-client
-RUN apt install -y libicu-dev
-RUN apt install -y libfreetype6-dev
-RUN apt install -y libjpeg62-turbo-dev
-RUN apt install -y libxml2-dev
-RUN apt install -y libxslt1-dev
-RUN apt install -y libmcrypt-dev
-RUN apt install -y libzip-dev
-#RUN apt install -y libwebp-dev
-RUN apt install -y libwebp7
-RUN apt install -y webp
-RUN apt install -y libmagickwand-dev --no-install-recommends \
-  && rm -rf /var/lib/apt/lists/*
-
-# Clear cache
-RUN apt clean && rm -rf /var/lib/apt/lists/*
+# Install the PHP gd library
+RUN docker-php-ext-configure gd \
+  --with-freetype \
+  --with-jpeg \
+  --with-webp; \
+docker-php-ext-install -j$(nproc) gd
 
 # Run docker-php-ext-install for available extensions
-RUN docker-php-ext-configure gd --with-freetype \
-  --with-jpeg --with-webp && docker-php-ext-install -j$(nproc) gd
+RUN set=-eux pipefail; \
+  docker-php-ext-install intl; \
+  docker-php-ext-install soap; \
+  docker-php-ext-install xsl; \
+  docker-php-ext-install zip; \
+  docker-php-ext-install opcache; \
+  docker-php-ext-install sockets
 
-RUN docker-php-ext-install intl
-RUN docker-php-ext-install soap
-RUN docker-php-ext-install xsl
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install opcache
-RUN docker-php-ext-install sockets
-#RUN printf "\n" | pecl install imagick && docker-php-ext-enable imagick
-
+RUN pecl install imagick-3.7.0 && docker-php-ext-enable imagick
 RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
 
 # Install Composer
