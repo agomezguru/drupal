@@ -1,6 +1,6 @@
 # Quick reference, Drupal
 
-Configured PHP 8.1.x server for deploy Drupal 9.x based projects
+Configured PHP 8.3.x server for deploy Drupal 10.x based projects
 
 - **Maintained by**:
 [agomezguru](https://github.com/agomezguru)
@@ -10,7 +10,7 @@ Configured PHP 8.1.x server for deploy Drupal 9.x based projects
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`9.x-php8.1.x`](https://github.com/agomezguru/drupal/tree/9.x-php8.1.x)
+- [`10.x-php8.3.x`](https://github.com/agomezguru/drupal/tree/10.x-php8.3.x)
 - [`latest`](https://github.com/agomezguru/drupal)
 
 ## How to use this image
@@ -45,7 +45,7 @@ services:
       - my-network
 
   php:
-    image: agomezguru/drupal:9.x-php8.1.x
+    image: agomezguru/drupal:10.x-php8.3.x
     volumes:
       - ../someCode:/var/www/html
       - my-public:/var/www/html/public
@@ -54,7 +54,7 @@ services:
       - my-network
 
   db:
-    image: percona:8.0
+    image: percona:8.0.34-26
     volumes:
       - my-db-data:/var/lib/mysql
       - ../percona/masterdb/config:/etc/mysql/conf.d
