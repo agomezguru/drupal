@@ -1,8 +1,3 @@
-# ====================================================================================
-#   Thanks to Daniel Ribeiro for his work (https://github.com/drgomesp/symfony-docker)
-#   And of course to Chema (https://github.com/jmsv23/docker-drupal)
-# ====================================================================================
-
 # This container is intended to be used like base common place for the Drupal projects 
 # currently only tested with 9 version.
 
