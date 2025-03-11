@@ -3,13 +3,13 @@
 
 # This Dockerfile was created 19/04/2021 for reuse the Docker build images more efficiently
 # so, please don't be use directly. For more details see the comments at the end of this file. 
-# Last updated: 12/10/2024 8:41 
+# Last updated: 10/03/2025 20:08 
 
 # Use an official PHP runtime as a parent image.
 # Ref.: https://www.drupal.org/docs/system-requirements/php-requirements
 # Ref.: https://github.com/dooman87/imagemagick-docker
 
-FROM php:8.3.8-fpm
+FROM php:8.3.17-fpm
 
 LABEL maintainer="Alejandro Gomez Lagunas <alagunas@coati.com.mx>"
 
@@ -58,9 +58,10 @@ RUN set=-eux pipefail; \
   docker-php-ext-install xsl; \
   docker-php-ext-install zip; \
   docker-php-ext-install opcache; \
-  docker-php-ext-install sockets
+  docker-php-ext-install sockets; \
+  docker-php-ext-install bcmath
   
-RUN apt-get -y update && \
+  RUN apt-get -y update && \
   apt-get -y upgrade && \
   apt-get install -y --no-install-recommends \
     make pkg-config autoconf curl cmake clang libomp-dev ca-certificates automake \
@@ -98,11 +99,12 @@ RUN apt-get -y update && \
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions imagick/imagick@master && \
-    docker-php-ext-enable imagick && \
-    pecl install -o -f redis && \
+    docker-php-ext-enable imagick
+    
+RUN pecl install -o -f redis && \
     rm -rf /tmp/pear && \
     docker-php-ext-enable redis
-
+    
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | \
   php -- --install-dir=/usr/local/bin --filename=composer
@@ -120,7 +122,7 @@ ENV PATH=/srv/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
 WORKDIR /srv
 # tag: agomezguru/drupal:10.x-php8.3.x
 # Example: docker build . --tag agomezguru/drupal:10.x-php8.3.x
-# Example: docker build --platform linux/amd64 --no-cache . --tag agomezguru/drupal:10.x-php8.3.8
+# Example: docker build --platform linux/amd64 --no-cache . --tag agomezguru/drupal:10.x-php8.3.17im
 
 # If you desire use this Docker Image directly, uncomment the next line. 
 # CMD php-fpm -F
