@@ -9,7 +9,7 @@
 # Ref.: https://www.drupal.org/docs/system-requirements/php-requirements
 # Ref.: https://github.com/dooman87/imagemagick-docker
 
-FROM php:8.3.17-fpm
+FROM php:8.4.7RC1-fpm
 
 LABEL maintainer="Alejandro Gomez Lagunas <alagunas@coati.com.mx>"
 
