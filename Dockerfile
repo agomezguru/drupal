@@ -117,7 +117,7 @@ RUN rm /etc/localtime && \
 RUN docker-php-ext-install pdo_mysql
 
 # Add drush to cli
-ENV PATH=/srv/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH=/srv/bin:/srv/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 WORKDIR /srv
 # tag: agomezguru/drupal:10.x-php8.3.x
